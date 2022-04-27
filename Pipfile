@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+boto3 = "*"
+requests = "*"
+zenpy = "*"
+
+[dev-packages]
+isort = "*"
+flake8 = "*"
+black = "*"
+mypy = "*"
+rope = "*"
+pytest = "*"
+pytest-cov = "*"
+autoflake8 = "*"
+pytest-mock = "*"
+flake8-black = "*"
+flake8-mypy = "*"
+
+[requires]
+python_version = "3.9"
