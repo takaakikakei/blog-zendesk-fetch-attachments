@@ -1,0 +1,16 @@
+stateMachines:
+  FetchAttachmentsFunc:
+    name: FetchAttachmentsFunc-${self:provider.stage}
+    definition:
+      StartAt: Fetch
+      States:
+        Fetch:
+          Type: Task
+          InputPath: '$'
+          Resource:
+            Fn::GetAtt: [fetch, Arn]
+          ResultPath: '$'
+          Next: Done
+        Done:
+          Type: Pass
+          End: true
