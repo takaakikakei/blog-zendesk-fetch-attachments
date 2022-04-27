@@ -37,7 +37,7 @@ custom:
   environment:
     dev:
       STAGE: ${self:provider.stage}
-      ZENDESK_SECRET: dev/zendesk
+      SECRET: dev/blog-zendesk-fetch-attachments
 package:
   patterns:
     - '!./**'
