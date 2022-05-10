@@ -65,6 +65,6 @@ def _init_use_case() -> FetchAttachmentsUseCase:
     return FetchAttachmentsUseCase(zendesk_service, s3_service)
 
 
-def exec(zendesk_id: str):
+def exec(zendesk_id: str) -> None:
     use_case = _init_use_case()
     return use_case.exec(zendesk_id)
