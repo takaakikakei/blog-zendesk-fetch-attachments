@@ -2,7 +2,6 @@ import glob
 import json
 import logging
 import os
-import uuid
 from typing import List
 
 import boto3
@@ -27,18 +26,23 @@ class FetchAttachmentsUseCase:
         latest_comment = comments[len(comments) - 1]
         attachments: List = self.zendesk_service.get_attachments(latest_comment)
 
+        if len(attachments) == 0:
+            return
+
         for attachment in attachments:
             attachment_id = attachment.id
-            destination = f"/tmp/{uuid.uuid4()}"
-            self.zendesk_service.download_attachment(attachment_id, destination)
-            self.s3_service.upload_file(destination, "zendesk")
+            lambda_tmp = f"/tmp/{attachment_id}"
+            s3_dest = f"{zendesk_id}/{attachment_id}"
+
+            self.zendesk_service.download_attachment(attachment_id, lambda_tmp)
+            logger.info(os.listdir("/tmp/"))
+            self.s3_service.upload_file(lambda_tmp, s3_dest)
+
+            for p in glob.glob(lambda_tmp):
+                if os.path.isfile(p):
+                    os.remove(p)
 
         logger.info(os.listdir("/tmp/"))
-        for p in glob.glob("/tmp/" + "*"):
-            if os.path.isfile(p):
-                os.remove(p)
-        logger.info(os.listdir("/tmp/"))
-
         return
 
 
