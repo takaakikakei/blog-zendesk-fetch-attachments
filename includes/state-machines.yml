@@ -1,6 +1,10 @@
 stateMachines:
   FetchAttachmentsFunc:
     name: FetchAttachmentsFunc-${self:provider.stage}
+    events:
+      - http:
+          path: '/'
+          method: POST
     definition:
       StartAt: Fetch
       States:
@@ -10,7 +14,13 @@ stateMachines:
           Resource:
             Fn::GetAtt: [fetch, Arn]
           ResultPath: '$'
-          Next: Done
-        Done:
-          Type: Pass
-          End: true
+          Catch:
+            - ErrorEquals:
+                - States.ALL
+              ResultPath: $
+              Next: FailState
+          Next: SuccessState
+        SuccessState:
+          Type: Succeed
+        FailState:
+          Type: Fail
