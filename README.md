@@ -28,7 +28,7 @@ $ pipenv install
 - S3 バケット
 - Secrets Manager
 
-設定内容は[ブログ]()を参照ください。
+設定内容は[Zendesk チケットの添付ファイルを取得して、S3 に保存してみた | DevelopersIO](https://dev.classmethod.jp/etc/zendesk-attachments-to-s3/)を参照ください。
 
 ## デプロイ
 
@@ -38,4 +38,4 @@ $ sls deploy --stage {{ステージ名}} --profile {{プロファイル名}}
 
 ## 補足
 
-- Zendesk トリガーや Webhook の設定は、[ブログ]()を参照ください。
+- Zendesk トリガーや Webhook の設定は、[Zendesk チケットの添付ファイルを取得して、S3 に保存してみた | DevelopersIO](https://dev.classmethod.jp/etc/zendesk-attachments-to-s3/)を参照ください。
